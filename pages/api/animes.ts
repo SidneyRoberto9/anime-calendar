@@ -1,20 +1,17 @@
-import clientPromise from '../../lib/mongodb';
+import ClientMG from '../../lib/mongodb';
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-
 export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
   try {
-    const client = await clientPromise;
-
-    const db = client.db('Animes_Calendar');
+    const client = await ClientMG();
 
     if (req.method == 'POST') {
-      const data = await db.collection('animes').insertOne(req.body);
+      const data = await client.insertOne(req.body);
 
       res.status(200).json(data);
     } else {
-      const data = await db.collection('animes').find({}).toArray();
+      const data = await client.find({}).toArray();
 
       res.status(200).json(data);
     }
