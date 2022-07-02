@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
 
+import clientPromise from '../lib/mongodb';
 import styles from '../styles/Home.module.css';
 
 import type { NextPage } from 'next';
-const Home: NextPage = () => {
+
+const Home: NextPage = (props) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -65,3 +67,18 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  try {
+    await clientPromise;
+
+    return {
+      props: { isConnected: true },
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: { isConnected: false },
+    };
+  }
+}
