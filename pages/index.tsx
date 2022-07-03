@@ -1,29 +1,63 @@
-import Tabs from '../components/Tabs/Tabs';
-import clientPromise from '../lib/mongodb';
+import axios from 'axios';
 
-import type { NextPage } from 'next';
+import Header from '../components/Header';
 
-const Home: NextPage = (props) => {
+import type { InferGetServerSidePropsType, NextPage } from 'next';
+
+export default function Home({
+  animes,
+}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   return (
     <>
-      <Tabs />
+      <Header data={animes} />
     </>
   );
-};
-
-export default Home;
+}
 
 export async function getServerSideProps() {
-  try {
-    await clientPromise;
+  const { data } = await axios.get(`${process.env.API}/animes-airing`);
 
-    return {
-      props: { isConnected: true },
-    };
-  } catch (e) {
-    console.error(e);
-    return {
-      props: { isConnected: false },
-    };
-  }
+  const animes = [
+    {
+      day: 'Domingo',
+      daySimple: 'Dom',
+      animes: data.filter((anime: any) => anime.date.day === 'domingo'),
+    },
+    {
+      day: 'Segunda',
+      daySimple: 'Seg',
+      animes: data.filter((anime: any) => anime.date.day === 'segunda'),
+    },
+    {
+      day: 'Terça',
+      daySimple: 'Ter',
+      animes: data.filter((anime: any) => anime.date.day === 'terca'),
+    },
+    {
+      day: 'Quarta',
+      daySimple: 'Qua',
+      animes: data.filter((anime: any) => anime.date.day === 'quarta'),
+    },
+    {
+      day: 'Quinta',
+      daySimple: 'Qui',
+      animes: data.filter((anime: any) => anime.date.day === 'quinta'),
+    },
+    {
+      day: 'Sexta',
+      daySimple: 'Sex',
+      animes: data.filter((anime: any) => anime.date.day === 'sexta'),
+    },
+    {
+      day: 'Sábado',
+      daySimple: 'Sab',
+      animes: data.filter((anime: any) => anime.date.day === 'sabado'),
+    },
+  ];
+
+  return {
+    props: {
+      animes,
+    },
+  };
 }
