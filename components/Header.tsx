@@ -1,5 +1,5 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery } from '@chakra-ui/react';
-import React, { Children, useState } from 'react';
+import React, { useState } from 'react';
 
 import Card from './Card';
 
@@ -42,20 +42,19 @@ const Header = (props: HeaderProps) => {
   const tabStyle = {
     fontSize: isLowerThan415 ? 'sm' : 'lg',
     pl: '10px',
+    w: isLowerThan415 ? '80%' : '100%',
 
-    rounded: '12px',
     _active: {
       bg: 'var(--main-bg)',
     },
     _selected: {
       textColor: 'var(--text)',
-      bg: 'var(--primary)',
-      borderBottom: 'var(--primary)',
+      borderBottom: '2px solid var(--primary)',
     },
     _hover: {
       textColor: 'var(--text)',
+      borderBottom: '2px solid var(--primary)',
     },
-    w: isLowerThan415 ? '80%' : '100%',
   };
 
   return (
@@ -74,7 +73,11 @@ const Header = (props: HeaderProps) => {
           ))}
         </TabList>
 
-        <TabPanels bg='var(--secondary-bg)' textColor='var(--text)' w='90%' mt='100px'>
+        <TabPanels
+          bg='var(--secondary-bg)'
+          textColor='var(--text)'
+          w='90%'
+          mt={isLowerThan415 ? '90px' : '100px'}>
           {data.map((a, index) => (
             <TabPanel key={index} sx={cardStyle}>
               {a.animes.map((anime: any) => (
