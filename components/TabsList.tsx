@@ -1,15 +1,14 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
+import { DateAnime } from '../model/anime';
 import Card from './Card';
 
-interface HeaderProps {
-  data: any[];
+interface TabsListProps {
+  tabContent: DateAnime[];
 }
 
-const Header = (props: HeaderProps) => {
-  const { data } = props;
-
+const TabsList = ({ tabContent }: TabsListProps) => {
   const [tabIndex, setTabIndex] = useState(new Date().getDay());
   const [isLowerThan415] = useMediaQuery('(max-width: 415px)');
 
@@ -57,6 +56,13 @@ const Header = (props: HeaderProps) => {
     },
   };
 
+  const tabPanelStyle = {
+    bg: 'var(--secondary-bg)',
+    textColor: 'var(--text)',
+    w: '90%',
+    mt: isLowerThan415 ? '90px' : '100px',
+  };
+
   return (
     <header>
       <Tabs
@@ -66,22 +72,18 @@ const Header = (props: HeaderProps) => {
         sx={center}
         w='100%'>
         <TabList sx={tabListStyle}>
-          {data.map((tab, index) => (
+          {tabContent.map((tab, index) => (
             <Tab key={index} sx={tabStyle}>
               {isLowerThan415 ? tab.daySimple : tab.day}
             </Tab>
           ))}
         </TabList>
 
-        <TabPanels
-          bg='var(--secondary-bg)'
-          textColor='var(--text)'
-          w='90%'
-          mt={isLowerThan415 ? '90px' : '100px'}>
-          {data.map((a, index) => (
+        <TabPanels sx={tabPanelStyle}>
+          {tabContent.map((tab, index) => (
             <TabPanel key={index} sx={cardStyle}>
-              {a.animes.map((anime: any) => (
-                <Card anime={anime} key={anime.id} />
+              {tab.animes.map((anime) => (
+                <Card anime={anime} key={anime._id} />
               ))}
             </TabPanel>
           ))}
@@ -91,4 +93,4 @@ const Header = (props: HeaderProps) => {
   );
 };
 
-export default Header;
+export default TabsList;
