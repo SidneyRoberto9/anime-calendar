@@ -11,6 +11,20 @@ interface cardProps {
 const Card = ({ anime }: cardProps) => {
   const [isLowerThan415] = useMediaQuery('(max-width: 415px)');
 
+  const CardBoxStyle = {
+    w: isLowerThan415 ? '38vw' : '200px',
+    h: isLowerThan415 ? '290px' : '390px',
+    rounded: '15px',
+    overflow: 'hidden',
+    bg: 'var(--main-bg)',
+    boxShadow: '0px 5px 27px -5px #000000',
+    transition: 'transform 800ms, box-shadow 1000ms',
+    _hover: {
+      transform: 'translateY(-2%)',
+      boxShadow: '0px 5px 27px -5px var(--hover)',
+    },
+  };
+
   const TextStyle = {
     textAlign: 'center',
     width: '97%',
@@ -24,13 +38,7 @@ const Card = ({ anime }: cardProps) => {
 
   return (
     <a href={anime.external[0]} target='_blanck'>
-      <Box
-        w={isLowerThan415 ? '38vw' : '200px'}
-        h={isLowerThan415 ? '290px' : '390px'}
-        rounded='15px'
-        overflow='hidden'
-        bg='var(--main-bg)'
-        boxShadow='0px 5px 27px -5px #000000'>
+      <Box sx={CardBoxStyle}>
         <Image
           src={anime.image}
           alt={anime.title}
