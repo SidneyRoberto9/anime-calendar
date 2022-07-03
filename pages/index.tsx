@@ -2,6 +2,7 @@ import Tabs from '../components/Tabs/Tabs';
 import clientPromise from '../lib/mongodb';
 
 import type { NextPage } from 'next';
+
 const Home: NextPage = (props) => {
   return (
     <>
