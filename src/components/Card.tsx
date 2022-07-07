@@ -29,11 +29,13 @@ const Card = ({ anime }: cardProps) => {
     textAlign: 'center',
     width: '97%',
     maxHeight: '50px',
+    lineHeight: '1.5rem',
     pl: '3%',
     overflow: 'hidden',
     fontSize: 'large',
     userSelect: 'none',
     bg: 'var(--main-bg)',
+    noOfLines: '3',
   };
 
   return (
