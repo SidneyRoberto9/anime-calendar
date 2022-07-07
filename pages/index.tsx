@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-import TabsList from '../components/TabsList';
-import { AnimeModel, DateAnime } from '../model/anime';
+import TabsList from '../src/components/TabsList';
+import { AnimeModel, DateAnime } from '../src/model/anime';
 
 import type { InferGetServerSidePropsType, NextPage } from 'next';
-
 export default function Home({
   dateAnime,
-}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+}: InferGetServerSidePropsType<
+  typeof getServerSideProps
+>): JSX.Element {
   return (
     <>
       <TabsList tabContent={dateAnime} />
@@ -16,7 +17,9 @@ export default function Home({
 }
 
 export async function getServerSideProps() {
-  const { data } = await axios.get<AnimeModel[]>(`${process.env.API}/animes-airing`);
+  const { data } = await axios.get<AnimeModel[]>(
+    `${process.env.API}/animes-airing`
+  );
 
   const dateAnime: DateAnime[] = [
     {

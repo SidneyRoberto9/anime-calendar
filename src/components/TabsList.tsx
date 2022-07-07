@@ -10,7 +10,7 @@ interface TabsListProps {
 
 const TabsList = ({ tabContent }: TabsListProps) => {
   const [tabIndex, setTabIndex] = useState(new Date().getDay());
-  const [isLowerThan415] = useMediaQuery('(max-width: 415px)');
+  const [isLowerThan420] = useMediaQuery('(max-width: 420px)');
 
   const center = {
     display: 'flex',
@@ -29,19 +29,21 @@ const TabsList = ({ tabContent }: TabsListProps) => {
   const tabListStyle = {
     position: 'fixed',
     top: 0,
-    w: '100vw',
-    p: isLowerThan415 ? '50px 0px 0px 0px' : '50px 25px 0px 25px',
+    w: '100%',
+    p: isLowerThan420 ? '50px 0px 0px 0px' : '50px 25px 0px 25px',
     pb: '5px',
     bg: 'var(--main-bg)',
     borderColor: 'var(--main-bg)',
     textColor: 'gray.400',
     zIndex: 1,
+    justifyContent: 'center',
   };
 
   const tabStyle = {
-    fontSize: isLowerThan415 ? 'sm' : 'lg',
-    pl: '10px',
-    w: isLowerThan415 ? '80%' : '100%',
+    fontSize: isLowerThan420 ? 'sm' : 'lg',
+    ml: '2%',
+    mr: '2%',
+    w: isLowerThan420 ? '40px' : '100%',
 
     _active: {
       bg: 'var(--main-bg)',
@@ -60,21 +62,20 @@ const TabsList = ({ tabContent }: TabsListProps) => {
     bg: 'var(--secondary-bg)',
     textColor: 'var(--text)',
     w: '90%',
-    mt: isLowerThan415 ? '90px' : '100px',
+    mt: isLowerThan420 ? '90px' : '100px',
   };
 
   return (
     <header>
       <Tabs
+        defaultIndex={tabIndex}
         onChange={(index) => setTabIndex(index)}
-        defaultValue={tabIndex}
         flexDirection='column'
-        sx={center}
-        w='100%'>
+        sx={center}>
         <TabList sx={tabListStyle}>
           {tabContent.map((tab, index) => (
             <Tab key={index} sx={tabStyle}>
-              {isLowerThan415 ? tab.daySimple : tab.day}
+              {isLowerThan420 ? tab.daySimple : tab.day}
             </Tab>
           ))}
         </TabList>
