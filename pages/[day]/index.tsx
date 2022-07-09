@@ -1,11 +1,11 @@
-import axios from 'axios';
 import { InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { airing } from '../../lib/api';
 import DisplayContent from '../../src/components/DisplayContent/DisplayContent';
 import Header from '../../src/components/Header/Header';
-import { AnimeModel } from '../../src/model/anime';
+import { AnimeDay, AnimeModel } from '../../src/model/anime';
 
 function Day({
   dateAnime,
@@ -14,29 +14,28 @@ function Day({
 >): JSX.Element {
   const router = useRouter();
   const { day } = router.query;
+  const actualDay: string = String(day);
 
-  let actualAnimes: AnimeModel[] = [];
+  let actualAnimes: Array<AnimeModel> = [];
 
   dateAnime.map((data) => {
-    if (data.day === day) {
+    if (data.day === actualDay) {
       actualAnimes = data.animes;
     }
   });
 
   return (
     <>
-      <Header actualDay={day as string} />
+      <Header actualDay={actualDay} />
       <DisplayContent animesOfDay={actualAnimes} />
     </>
   );
 }
 
 export async function getServerSideProps() {
-  const { data } = await axios.get<AnimeModel[]>(
-    `${process.env.API}/animes-airing`
-  );
+  const { data } = await airing.get<AnimeModel[]>('');
 
-  const dateAnime: any[] = [
+  const dateAnime: AnimeDay[] = [
     {
       day: 'Dom',
       animes: data.filter((anime) => anime.date.day === 'domingo'),
