@@ -1,67 +1,32 @@
-import axios from 'axios';
+import Router from 'next/router';
+import { CSSProperties, useEffect } from 'react';
+import { ClipLoader } from 'react-spinners';
 
-import TabsList from '../src/components/TabsList';
-import { AnimeModel, DateAnime } from '../src/model/anime';
+import dayWeek from '../src/utils/date.util';
 
-import type { InferGetServerSidePropsType, NextPage } from 'next';
-export default function Home({
-  dateAnime,
-}: InferGetServerSidePropsType<
-  typeof getServerSideProps
->): JSX.Element {
+const override: CSSProperties = {
+  display: 'block',
+  margin: '0 auto',
+  position: 'absolute',
+  left: '40vw',
+  top: '40vh',
+  width: '150px',
+  height: '150px',
+};
+
+export default function Home() {
+  useEffect(() => {
+    const { pathname } = Router;
+    const day = new Date().getDay();
+
+    if (pathname === '/') {
+      Router.push(`/${dayWeek[day]}`);
+    }
+  }, []);
+
   return (
     <>
-      <TabsList tabContent={dateAnime} />
+      <ClipLoader color='#1d1825' cssOverride={override} />
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const { data } = await axios.get<AnimeModel[]>(
-    `${process.env.API}/animes-airing`
-  );
-
-  const dateAnime: DateAnime[] = [
-    {
-      day: 'Domingo',
-      daySimple: 'Dom',
-      animes: data.filter((anime) => anime.date.day === 'domingo'),
-    },
-    {
-      day: 'Segunda',
-      daySimple: 'Seg',
-      animes: data.filter((anime) => anime.date.day === 'segunda'),
-    },
-    {
-      day: 'Terça',
-      daySimple: 'Ter',
-      animes: data.filter((anime) => anime.date.day === 'terca'),
-    },
-    {
-      day: 'Quarta',
-      daySimple: 'Qua',
-      animes: data.filter((anime) => anime.date.day === 'quarta'),
-    },
-    {
-      day: 'Quinta',
-      daySimple: 'Qui',
-      animes: data.filter((anime) => anime.date.day === 'quinta'),
-    },
-    {
-      day: 'Sexta',
-      daySimple: 'Sex',
-      animes: data.filter((anime) => anime.date.day === 'sexta'),
-    },
-    {
-      day: 'Sábado',
-      daySimple: 'Sab',
-      animes: data.filter((anime) => anime.date.day === 'sabado'),
-    },
-  ];
-
-  return {
-    props: {
-      dateAnime,
-    },
-  };
 }

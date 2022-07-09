@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
+import dayWeek from '../../utils/date.util';
 import styles from './Header.module.scss';
 
 interface HeaderProps {
@@ -13,27 +14,17 @@ const Header = ({ actualDay }: HeaderProps) => {
       <div className={styles.header}>
         {dayWeek.map((day, index) => (
           <Link href={`/${day}`} key={index}>
-            <button
+            <span
               className={`${styles.button} ${
                 day == actualDay ? styles.selected : ''
               }`}>
               {day}
-            </button>
+            </span>
           </Link>
         ))}
       </div>
     </div>
   );
 };
-
-const dayWeek: string[] = [
-  'Dom',
-  'Seg',
-  'Ter',
-  'Qua',
-  'Qui',
-  'Sex',
-  'Sab',
-];
 
 export default Header;

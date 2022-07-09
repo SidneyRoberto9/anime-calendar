@@ -11,7 +11,10 @@ interface CardProps {
 const Card = ({ anime }: CardProps) => {
   return (
     <div className={styles.cardBox}>
-      <a href={anime.external[0]} target='_blanck'>
+      <a
+        href={anime.external[0]}
+        target='_blanck'
+        className={styles.link}>
         <Image
           src={anime.image}
           alt={anime.title}
@@ -20,7 +23,7 @@ const Card = ({ anime }: CardProps) => {
           objectFit='cover'
         />
         <div className={styles.titleCard}>
-          <h6 className={styles.title}>{anime.title}</h6>
+          <span className={styles.title}>{anime.title}</span>
         </div>
       </a>
     </div>
