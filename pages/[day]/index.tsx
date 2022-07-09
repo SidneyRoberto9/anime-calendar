@@ -20,7 +20,9 @@ function Day({
 
   dateAnime.map((data) => {
     if (data.day === actualDay) {
-      actualAnimes = data.animes;
+      actualAnimes = data.animes.sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
     }
   });
 
