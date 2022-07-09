@@ -2,7 +2,7 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery } from '@chakra-
 import React, { useState } from 'react';
 
 import { DateAnime } from '../model/anime';
-import Card from './Card';
+import Card from './Card/Card2';
 
 interface TabsListProps {
   tabContent: DateAnime[];

@@ -2,13 +2,13 @@ import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react';
 
-import { AnimeModel } from '../model/anime';
+import { AnimeModel } from '../../model/anime';
 
 interface cardProps {
   anime: AnimeModel;
 }
 
-const Card = ({ anime }: cardProps) => {
+const Card2 = ({ anime }: cardProps) => {
   const [isLowerThan415] = useMediaQuery('(max-width: 415px)');
 
   const CardBoxStyle = {
@@ -56,4 +56,4 @@ const Card = ({ anime }: cardProps) => {
   );
 };
 
-export default Card;
+export default Card2;
