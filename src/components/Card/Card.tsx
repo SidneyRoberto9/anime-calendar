@@ -20,7 +20,7 @@ const Card = ({ anime }: Cardprops) => {
           objectFit='cover'
         />
         <div className={styles.titleCard}>
-          <span className={styles.title}>{anime.title}</span>
+          <h6 className={styles.title}>{anime.title}</h6>
         </div>
       </a>
     </div>

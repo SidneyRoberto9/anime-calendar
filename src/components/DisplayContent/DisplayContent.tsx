@@ -9,10 +9,12 @@ interface DisplayContentProps {
 
 function DisplayContent({ animesOfDay }: DisplayContentProps) {
   return (
-    <div className={styles.containerCardStyle}>
-      {animesOfDay.map((anime: any, index: number) => (
-        <Card anime={anime} key={index} />
-      ))}
+    <div className={styles.display}>
+      <div className={styles.containerCardStyle}>
+        {animesOfDay.map((anime: any, index: number) => (
+          <Card anime={anime} key={index} />
+        ))}
+      </div>
     </div>
   );
 }
