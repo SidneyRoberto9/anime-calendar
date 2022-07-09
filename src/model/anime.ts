@@ -13,8 +13,7 @@ export interface animeDate {
   season: string;
 }
 
-export interface DateAnime {
+export interface AnimeDay {
   day: string;
-  daySimple: string;
   animes: AnimeModel[];
 }
