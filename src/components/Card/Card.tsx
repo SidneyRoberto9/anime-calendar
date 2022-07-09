@@ -4,11 +4,11 @@ import React from 'react';
 import { AnimeModel } from '../../model/anime';
 import styles from './Card.module.scss';
 
-interface Cardprops {
+interface CardProps {
   anime: AnimeModel;
 }
 
-const Card = ({ anime }: Cardprops) => {
+const Card = ({ anime }: CardProps) => {
   return (
     <div className={styles.cardBox}>
       <a href={anime.external[0]} target='_blanck'>
