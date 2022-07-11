@@ -1,6 +1,6 @@
 import { InferGetServerSidePropsType } from 'next';
-import { useRouter } from 'next/router';
-import React from 'react';
+import Router, { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 
 import { airing } from '../../lib/api';
 import DisplayContent from '../../src/components/DisplayContent/DisplayContent';
@@ -17,6 +17,13 @@ function Day({
   const actualDay: string = String(day);
 
   let actualAnimes: Array<AnimeModel> = [];
+
+  useEffect(() => {
+    setInterval(() => {
+      Router.push('/');
+    }, 18000000);
+    // 5 horas
+  }, []);
 
   dateAnime.map((data) => {
     if (data.day === actualDay) {
