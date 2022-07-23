@@ -9,6 +9,7 @@ import { AnimeDay, AnimeModel } from '../../src/model/anime';
 
 function Day({
   dateAnime,
+  animeQTD,
 }: InferGetServerSidePropsType<
   typeof getServerSideProps
 >): JSX.Element {
@@ -35,7 +36,7 @@ function Day({
 
   return (
     <>
-      <Header actualDay={actualDay} />
+      <Header actualDay={actualDay} animeQtd={animeQTD} />
       <DisplayContent animesOfDay={actualAnimes} />
     </>
   );
@@ -43,6 +44,8 @@ function Day({
 
 export async function getServerSideProps() {
   const { data } = await airing.get<AnimeModel[]>('');
+
+  const animeQTD: number = data.length;
 
   const dateAnime: AnimeDay[] = [
     {
@@ -78,6 +81,7 @@ export async function getServerSideProps() {
   return {
     props: {
       dateAnime,
+      animeQTD,
     },
   };
 }

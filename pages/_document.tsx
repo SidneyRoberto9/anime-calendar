@@ -6,8 +6,17 @@ export default function Document() {
       <Head />
       <link rel='shortcut icon' href='/static/letter-a.ico' />
       <meta
+        name='viewport'
+        content='initial-scale=1.0, width=device-width'
+      />
+      <meta
         name='description'
-        content='Calendario dos Lançamentos de Animes de Cada temporada divididos por semana e busca'
+        content='Calendário dos Lançamentos de Animes de Cada temporada divididos por semana e busca'
+      />
+      <meta
+        property='og:title'
+        content='Animes Calendar'
+        key='ogtitle'
       />
       <title>Animes Calendar</title>
       <body>
